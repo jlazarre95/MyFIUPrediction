@@ -118,9 +118,10 @@ ostream& operator<<(ostream& os, const tableSlice& slice) {
 	string result = "";
 
 	for (string value : slice.all_values)
-		result += (value + " ");
+		result += (value + ", ");
 
 	result.pop_back(); // remove last space
+	result.pop_back(); //remove last comma
 
 	cout << result;
 

@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 /*
  
  THINGS TO DO:
@@ -19,6 +17,13 @@ Schema for student transcript
 @ATTRIBUTE category STRING
 */
 
+#include "main_dependencies.h"
+
+#define CLASS_LBL "grade_received"
+#define IGNORED_ATTRS std::vector<std::string>({ "transcript_id", "course_name"/*, "tc_credits" /*"semester_taken",*/ /*"course_num"*/ })
+
+std::vector<std::string> record_values;
+
 /* Debug function */
 static void printVec(std::vector<std::string> string_vector)
 {
@@ -31,35 +36,68 @@ static void printVec(std::vector<std::string> string_vector)
 
 }
 
+/* Function to create a record of tableRow type using a vector of strings */
+tableRow createRecord(std::vector<std::string> record_values)
+{
+	tableRow record = tableRow(record_values.begin(), record_values.end());
+
+	return record;
+}
+
 int main(int argc, char* argv[])
 {
 	using namespace std;
 
-	
-	DataFileParser* parser = new ArffParser();
-	parser->openFile("dat/student_transcript.arff");
-	parser->parseFile();
-	relationObj relation_obj = parser->getRelationObj();
+	string class_label = CLASS_LBL;
+	vector<string> ignored_attributes = IGNORED_ATTRS;
 
-	string class_label = "grade";
-	//cout << "Initializing Decision Tree...\n";
+	cout << "Initializing parser object...\n";
+	DataFileParser* parser = new ArffParser();
+	cout << "Opening file...\n";
+	parser->openFile("dat/student_transcript.arff");
+	cout << "Parsing file...\n";
+	parser->parseFile();
+	cout << "Done parsing file...\n";
+	relationObj relation_obj = parser->getRelationObj();
+	parser->closeFile();
+	cout << "File successfully closed...\n";
+
+	cout << "Initializing Decision Tree...\n";
 	J48DecisionTree* classifier = new J48DecisionTree(relation_obj, class_label); 
+
+	/* Set up default value based on class label (picks majority value from class label column) */
+	cout << "Setting default value...\n";
 	string def = classifier->relation_obj.getTable().getColumn(relation_obj.getIndexOfAttribute(class_label)).getMajorityValue();
 	classifier->setDefaultClassLabel(def);
+	cout << "Default value set to " << def << "...\n";
 
-	vector<string> ignored_attributes = { "transcript_id"/*, "course_name", "tc_credits" /*"semester_taken",*/ /*"course_num"*/};
-	
-	 /* Predict "grade_received" class label for record */
-	vector<string> record_values = 
-	 { "8", "COP 5725", "Fall 2016", "?" , "?" , "Principles of Database Management Systems", "Computer Programming" };
+	 /* Predict class label for each record */
+	tableRow record = createRecord(vector<string>({ "8", "COP 5725", "Fall 2016", "?" , "?" , "DBMS", "Computer Programming" }));
+	string predicted_class_label = classifier->predictIgnore(record, ignored_attributes.begin(), ignored_attributes.end());
+	cout << "Class label for record successfully predicted...\n";
 
-	tableRow record = tableRow(record_values.begin(), record_values.end());
-	string predicted_class_label = classifier->predict(record);
+	cout << endl;
 
-	/* Print record */
-	cout << "\nPredicted class label of record (" << record << "): " << predicted_class_label;
+	/* Print decision tree */
+	cout << "Printing decision tree...\n";
+	cout << endl;
+	cout << *classifier << endl;
+	cout << "Done printing decision tree...\n";
+	cout << endl;
 
+	/* Print records and their predicted class labels */
+	cout << "Printing records and their predicted class labels...\n";
+	cout << "(" << record << ") : " << predicted_class_label << endl;
+
+	/* Deallocate memory for dynamic objects, arrays, etc. */
+	cout << endl;
+	cout << "Finished classification procedure...\n";
+	cout << "Exiting...\n";
+	cout << "Removing decision tree from heap...\n";
 	delete classifier;
+
+	cout << "Done!\n";
+
 
 
 	return 0;
