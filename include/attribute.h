@@ -19,10 +19,16 @@ enum struct AttributeType
 typedef struct Attribute {
 
 public:
+
 	std::string name;
 	AttributeType type;
 	std::vector<std::string> all_values;
 	bool is_unique;
+
+	Attribute();
+	~Attribute();
+	void setUniqueness(bool _is_unique) { is_unique = _is_unique; }
+	int getNumOfValues() { return all_values.size(); }
 
 	template <class InputIterator>
 	void setAllValues(InputIterator first, InputIterator last)
@@ -36,10 +42,6 @@ public:
 		is_unique = false;
 	}
 
-	void setUniqueness(bool _is_unique) { is_unique = _is_unique; }
-	int getNumOfValues() { return all_values.size(); }
-
-
 	auto begin() -> decltype(all_values.begin()) { return all_values.begin(); }
 	auto end()  -> decltype(all_values.end()) { return all_values.end(); }
 
@@ -50,5 +52,6 @@ public:
 		else
 			return false;
 	}
+
 
 } Attribute;

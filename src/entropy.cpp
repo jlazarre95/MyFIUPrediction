@@ -16,7 +16,7 @@ Entropy::~Entropy()
 }
 
 /* Caclulate the entropy of an attribute in a subset_of_records. */
-float Entropy::calculate_entropy(int attribute_index, RelationTable table)
+float Entropy::calculateEntropy(int attribute_index, RelationTable table)
 {
 	float entropy = 0.0;
 	int num_of_attribute_value_contributions = 0;
@@ -58,16 +58,16 @@ float Entropy::calculate_entropy(int attribute_index, RelationTable table)
 }
 
 /* Calculate the impurity (entropy) of an attribute. */
-float Entropy::calculate_impurity(int attribute_index, RelationTable table)
+float Entropy::calculateImpurity(int attribute_index, RelationTable table)
 {
 
-	return calculate_entropy(attribute_index, table); // use function call simply for readability -- use all records
+	return calculateEntropy(attribute_index, table); // use function call simply for readability -- use all records
 
 }
 
 
 /* Calculate the expected conditional entropy of an attribute in relation to another attribute. */
-float Entropy::calculate_conditional_entropy(int of_attribute_index, int on_attribute_index, RelationTable table)
+float Entropy::calculateConditionalEntropy(int of_attribute_index, int on_attribute_index, RelationTable table)
 {
 	float conditional_entropy = 0.0;
 
@@ -94,7 +94,7 @@ float Entropy::calculate_conditional_entropy(int of_attribute_index, int on_attr
 			}
 
 		/* For every on_attribute_value, iterate over collected records (of_attribute_value_records) to calculate conditional entropy */
-		float on_attribute_entropy = calculate_entropy(on_attribute_index, of_attribute_value_records); 
+		float on_attribute_entropy = calculateEntropy(on_attribute_index, of_attribute_value_records); 
 
 		conditional_entropy += (of_attribute_value_frequency/ (float) table.getNumOfRows()) * on_attribute_entropy;
 
@@ -109,7 +109,7 @@ int Entropy::findBestInitalSplit(int class_label_index, RelationTable table, flo
 	int best_attribute_index = -1;
 	float best_attribute_entropy = FLT_MAX;
 
-	float class_label_entropy = calculate_entropy(class_label_index, table);
+	float class_label_entropy = calculateEntropy(class_label_index, table);
 	float max_information_gain = 0;
 
 	AttributeList relation_attribute_list = relation_header.all_attributes;
@@ -134,7 +134,7 @@ int Entropy::findBestInitalSplit(int class_label_index, RelationTable table, flo
 			continue;
 		}
 			
-		float conditional_entropy = calculate_conditional_entropy(relation_header_attribute_index, class_label_index, table);
+		float conditional_entropy = calculateConditionalEntropy(relation_header_attribute_index, class_label_index, table);
 
 		float new_info_gain = informationGain(class_label_entropy, conditional_entropy);
 		float old_info_gain = informationGain(class_label_entropy, best_attribute_entropy);
@@ -168,7 +168,7 @@ int Entropy::findBestSplitOnBranch(int class_label_index, int attribute_index_of
 	int best_attribute_index = -1;
 	float best_attribute_entropy = FLT_MAX;
 
-	float branch_entropy = calculate_entropy(class_label_index, table); // assumes all rows with outlook="sunny" are selected
+	float branch_entropy = calculateEntropy(class_label_index, table); // assumes all rows with outlook="sunny" are selected
 	float max_information_gain = 0;
 
 	AttributeList relation_attribute_list = relation_header.all_attributes;
@@ -193,7 +193,7 @@ int Entropy::findBestSplitOnBranch(int class_label_index, int attribute_index_of
 			continue;
 		}
 
-		float conditional_entropy = calculate_conditional_entropy(relation_header_attribute_index, class_label_index, table);
+		float conditional_entropy = calculateConditionalEntropy(relation_header_attribute_index, class_label_index, table);
 
 		float new_info_gain = informationGain(branch_entropy, conditional_entropy);
 		float old_info_gain = informationGain(branch_entropy, best_attribute_entropy);

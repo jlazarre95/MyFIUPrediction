@@ -9,7 +9,7 @@ public:
 	ImpurityMeasure();
 	~ImpurityMeasure();
 	ImpurityMeasure(RelationHeader _relation_header) { setRelationHeader(_relation_header); }
-	virtual float calculate_impurity(int attribute_index, RelationTable table) = 0; // calculate for any attribute, most likely will be for class_label
+	virtual float calculateImpurity(int attribute_index, RelationTable table) = 0; // calculate for any attribute, most likely will be for class_label
 	virtual int findBestInitalSplit(int class_label_index, RelationTable table, float* attribute_impurity = NULL) = 0;
 	virtual int findBestSplitOnBranch(int class_label_index, int attribute_index_of_value, RelationTable table, float* attribute_impurity = NULL) = 0;
 	void setRelationHeader(RelationHeader _relation_header);

@@ -18,7 +18,6 @@
 		std::vector<std::vector<std::string>> parseRecords();
 		
 	private:
-	
 		std::ifstream arff_file_stream;
 
 

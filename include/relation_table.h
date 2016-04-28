@@ -13,6 +13,11 @@ struct RelationObj;
 typedef struct RelationTable{
 
 public:
+	friend RelationObj;
+
+	std::vector<TableRow> all_rows;
+	int getNumOfRows();
+
 	RelationTable();
 	~RelationTable();
 	template <class InputIterator>
@@ -21,12 +26,8 @@ public:
 	TableColumn getColumn(int index);
 	void push_back(TableRow row);
 	RelationTable selectAll(int attribute_index, std::string attribute_value_name);
-	friend RelationObj;
 	/*int getSize();
 	std::vector<std::vector<std::string>> getRecords();*/
-
-	std::vector<TableRow> all_rows;
-	int getNumOfRows();
 
 	auto begin() -> decltype(all_rows.begin()) { return all_rows.begin(); }
 	auto end() -> decltype(all_rows.end()) { return all_rows.end(); }

@@ -8,6 +8,7 @@ typedef struct TableSlice
 {
 
 public:
+	friend RelationTable;
 
 	TableSlice();
 	template <class InputIterator>
@@ -17,9 +18,9 @@ public:
 	} // use template
 
 	~TableSlice();
+
 	int size();
 	std::string operator[](int index) { return all_values[index]; }
-	friend RelationTable;
 
 	std::string getMajorityValue();
 	std::vector<std::string> all_values;
@@ -28,8 +29,6 @@ public:
 
 	auto begin() -> decltype(all_values.begin()) { return all_values.begin(); }
 	auto end() -> decltype(all_values.end()) { return all_values.end(); }
-
-	friend std::ostream& operator<<(std::ostream& os, const TableSlice& slice);
 
 protected:
 	template <class InputIterator>
@@ -49,6 +48,8 @@ protected:
 		}
 	
 	} // use template
+
+	friend std::ostream& operator<<(std::ostream& os, const TableSlice& slice);
 
 private:
 

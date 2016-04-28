@@ -5,18 +5,6 @@ THINGS TO DO:
  
  */
 
-/* 
-Schema for student transcript
-
-@ATTRIBUTE transcript_id NUMERIC
-@ATTRIBUTE course_num STRING
-@ATTRIBUTE semester_taken STRING
-@ATTRIBUTE grade_received{ A,A-,B+,B,B-,C+,C,C-,D+,D,D-,F,P,INC,I }
-@ATTRIBUTE passed{ t,f }
-@ATTRIBUTE course_name STRING
-@ATTRIBUTE category STRING
-*/
-
 #include "main_dependencies.h"
 
 #define CLASS_LBL "grade_received"
@@ -37,7 +25,7 @@ static void printVec(std::vector<std::string> string_vector)
 }
 
 /* Function to create a record of tableRow type using a vector of strings */
-TableRow createRecord(std::vector<std::string> record_values)
+static TableRow createRecord(std::vector<std::string> record_values)
 {
 	TableRow record = TableRow(record_values.begin(), record_values.end());
 
@@ -100,7 +88,7 @@ int main(int argc, char* argv[])
 
 	cout << endl;
 
-	/* Deallocate memory for dynamic objects, arrays, etc. */
+	/* De-allocate memory for dynamic objects, arrays, etc. */
 	cout << "Finished classification procedure...\n";
 	cout << "Exiting...\n";
 	cout << "Removing decision tree from heap...\n";

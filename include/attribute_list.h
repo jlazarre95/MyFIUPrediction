@@ -6,6 +6,8 @@
 typedef struct AttributeList
 {
 public:
+	std::vector<Attribute> all_attributes;
+
 	AttributeList();
 	~AttributeList();
 	template <class InputIterator>
@@ -16,8 +18,6 @@ public:
 	int getIndexOfAttribute(std::string attribute_name);
 	int getNumOfAttributes();
 	Attribute operator[](int index) { return getAttribute(index); }
-
-	std::vector<Attribute> all_attributes;
 
 	auto begin() -> decltype(all_attributes.begin()) { return all_attributes.begin(); }
 	auto end() -> decltype(all_attributes.end()) { return all_attributes.end(); }

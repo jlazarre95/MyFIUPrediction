@@ -16,7 +16,6 @@ TODO: deal with decision trees that don't cover all rules
 		J48DecisionTree(ImpurityMeasure* _impurity_measure, std::string _class_label);*/
 		J48DecisionTree(RelationObj _relation_obj, std::string _class_label);
 		J48DecisionTree(RelationObj _relation_obj, ImpurityMeasure * _impurity_measure, std::string _class_label);
-
 		~J48DecisionTree();
 
 		void setImpurityMeasure(ImpurityMeasure* _impurity_measure);
@@ -47,6 +46,7 @@ TODO: deal with decision trees that don't cover all rules
 
 		void setDefaultClassLabel(std::string _default_class_label_value) { default_class_label_value = _default_class_label_value; }
 		//float getClassLabelImpurity();
+
 		void operator<<(int i) { return; }
 		friend std::ostream& operator<<(std::ostream& os, const J48DecisionTree& jdt);
 
