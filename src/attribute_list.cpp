@@ -2,30 +2,30 @@
 #include <stdexcept>
 
 using namespace std;
-attributeList::attributeList()
+AttributeList::AttributeList()
 {
 }
 
 
-attributeList::~attributeList()
+AttributeList::~AttributeList()
 {
 }
 
 
 //template<class InputIterator>
-//attributeList::attributeList(InputIterator first, InputIterator last)
+//AttributeList::AttributeList(InputIterator first, InputIterator last)
 //{
 //	setAllValues(first, last);
 //}
 
 
-void attributeList::addAttribute(attribute new_attribute)
+void AttributeList::addAttribute(Attribute new_attribute)
 {
 	all_attributes.push_back(new_attribute);
 }
 
 //template<class InputIterator>
-//void attributeList::setAllAttributes(InputIterator first, InputIterator last)
+//void AttributeList::setAllAttributes(InputIterator first, InputIterator last)
 //{
 //	for (InputIterator all_attributes_iterator = first; all_attributes_iterator != last; all_attributes_iterator++)
 //	{
@@ -36,14 +36,14 @@ void attributeList::addAttribute(attribute new_attribute)
 //}
 
 
-attribute attributeList::getAttribute(int index)
+Attribute AttributeList::getAttribute(int index)
 {
 	return all_attributes[index];
 }
 
-attribute attributeList::getAttribute(std::string attribute_name)
+Attribute AttributeList::getAttribute(std::string attribute_name)
 {
-	attribute attr;
+	Attribute attr;
 
 	for (auto all_attributes_iterator = all_attributes.begin(); all_attributes_iterator != all_attributes.end(); all_attributes_iterator++)
 	{
@@ -56,11 +56,11 @@ attribute attributeList::getAttribute(std::string attribute_name)
 	throw invalid_argument("Attribute " + attribute_name + " does not exist!");
 }
 
-int attributeList::getIndexOfAttribute(std::string attribute_name)
+int AttributeList::getIndexOfAttribute(std::string attribute_name)
 {
 	int index_of_attribute = 0;
 
-	for (attribute relation_attribute : all_attributes)
+	for (Attribute relation_attribute : all_attributes)
 	{
 		if (relation_attribute.name == attribute_name)
 			return index_of_attribute;
@@ -70,7 +70,7 @@ int attributeList::getIndexOfAttribute(std::string attribute_name)
 	return -1;
 }
 
-int attributeList::getNumOfAttributes()
+int AttributeList::getNumOfAttributes()
 {
 	return all_attributes.size();
 }

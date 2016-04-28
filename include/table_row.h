@@ -1,15 +1,15 @@
 #pragma once
 #include "table_slice.h"
 
-struct relationTable;
+struct RelationTable;
 
-typedef struct tableRow : public tableSlice
+typedef struct TableRow : public TableSlice
 {
 public:
-	tableRow();
+	TableRow();
 	template <class InputIterator>
-	tableRow(InputIterator first, InputIterator last) : tableSlice(first, last) {}; // use template
-	~tableRow();
-	friend relationTable;
-} tableRow;
+	TableRow(InputIterator first, InputIterator last) : TableSlice(first, last) {}; // use template
+	~TableRow();
+	friend RelationTable;
+} TableRow;
 

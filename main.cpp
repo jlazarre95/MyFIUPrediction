@@ -37,9 +37,9 @@ static void printVec(std::vector<std::string> string_vector)
 }
 
 /* Function to create a record of tableRow type using a vector of strings */
-tableRow createRecord(std::vector<std::string> record_values)
+TableRow createRecord(std::vector<std::string> record_values)
 {
-	tableRow record = tableRow(record_values.begin(), record_values.end());
+	TableRow record = TableRow(record_values.begin(), record_values.end());
 
 	return record;
 }
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	parser->parseFile();
 	cout << "Done parsing file...\n";
 	
-	relationObj relation_obj = parser->getRelationObj();
+	RelationObj relation_obj = parser->getRelationObj();
 	parser->closeFile();
 	cout << "File successfully closed...\n";
 
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 	cout << "Default value set to " << default_class_label << "...\n";
 
 	 /* Predict class label for each record */
-	tableRow record = createRecord(vector<string>({ "8", "COP 5725", "Fall 2016", "?" , "?" , "DBMS", "Computer Programming" }));
+	TableRow record = createRecord(vector<string>({ "8", "COP 5725", "Fall 2016", "?" , "?" , "DBMS", "Computer Programming" }));
 	string predicted_class_label = classifier->predictIgnore(record, ignored_attributes.begin(), ignored_attributes.end());
 	cout << "Class label for record successfully predicted...\n";
 

@@ -14,7 +14,7 @@
 		virtual int closeFile(); // override
 
 		std::string parseName();
-		std::vector<attribute> parseAttributeList();
+		std::vector<Attribute> parseAttributeList();
 		std::vector<std::vector<std::string>> parseRecords();
 		
 	private:

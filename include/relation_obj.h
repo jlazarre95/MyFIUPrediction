@@ -4,28 +4,28 @@
 
 #include <string>
 
-typedef struct relationObj {
+typedef struct RelationObj {
 
 public:
-	relationObj();
-	~relationObj();
-	relationObj(std::string name, relationHeader header, relationTable table);
+	RelationObj();
+	~RelationObj();
+	RelationObj(std::string name, RelationHeader header, RelationTable table);
 	int getIndexOfAttribute(std::string attribute_name);
 	std::string getName() { return header.name; }
-	attributeList getAllAttributes();
+	AttributeList getAllAttributes();
 	int getNumOfAttributes();
 	int getNumOfRecords();
-	void setTable(relationTable _table);
-	relationHeader getHeader() { return header; }
-	relationTable getTable();
-	relationTable selectAll(int attribute_index, std::string attribute_value_name);
+	void setTable(RelationTable _table);
+	RelationHeader getHeader() { return header; }
+	RelationTable getTable();
+	RelationTable selectAll(int attribute_index, std::string attribute_value_name);
 
-	attribute operator[](int index) { return getAllAttributes()[index]; }
+	Attribute operator[](int index) { return getAllAttributes()[index]; }
 	std::string getAttributeName(int index) { return getAllAttributes()[index].name; }
 
 
 private:
-	relationHeader header;
-	relationTable table;
+	RelationHeader header;
+	RelationTable table;
 
-} relationObj;
+} RelationObj;

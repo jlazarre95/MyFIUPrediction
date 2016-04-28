@@ -4,28 +4,28 @@
 
 using namespace std;
 
-tableSlice::tableSlice()
+TableSlice::TableSlice()
 {
 }
 
 //template <class InputIterator>
-//tableSlice::tableSlice(InputIterator first, InputIterator last) // use template
+//TableSlice::TableSlice(InputIterator first, InputIterator last) // use template
 //{
 //	setAllValues(first, last);
 //}
 
 
-tableSlice::~tableSlice()
+TableSlice::~TableSlice()
 {
 }
 
-int tableSlice::size()
+int TableSlice::size()
 {
 	return all_values.size();
 }
 
 //template <class InputIterator>
-//void tableSlice::setAllValues(InputIterator first, InputIterator last) // use template
+//void TableSlice::setAllValues(InputIterator first, InputIterator last) // use template
 //{
 //	for (InputIterator all_values_iterator = first; all_values_iterator != last; all_values_iterator++)
 //	{
@@ -42,7 +42,7 @@ int tableSlice::size()
 //
 //}
 
-//void tableSlice::setAllValues(vector<string> _all_values) // use template
+//void TableSlice::setAllValues(vector<string> _all_values) // use template
 //
 //{
 //	for (auto value_iterator = _all_values.begin(); value_iterator != _all_values.end(); value_iterator++)
@@ -52,7 +52,7 @@ int tableSlice::size()
 //
 //}
 
-string tableSlice::getMajorityValue()
+string TableSlice::getMajorityValue()
 {
 	vector<pair<string, int>> v;
 	bool does_value_exist;
@@ -88,21 +88,21 @@ string tableSlice::getMajorityValue()
 	return most_frequent_value.first;
 }
 
-void tableSlice::push_back(string value)
+void TableSlice::push_back(string value)
 {
 	all_values.push_back(value);
 
 	return;
 }
 
-bool tableSlice::hasDistinctValues()
+bool TableSlice::hasDistinctValues()
 {
 	vector<string> v;
 	bool has_distinct_values;
 
 	for (string value : all_values)
 	{
-		/* If value exists in v, then this tableSlice does NOT have distinct values */
+		/* If value exists in v, then this TableSlice does NOT have distinct values */
 		if (find(v.begin(), v.end(), value) != v.end())
 			return has_distinct_values = false;
 
@@ -113,7 +113,7 @@ bool tableSlice::hasDistinctValues()
 }
 
 
-ostream& operator<<(ostream& os, const tableSlice& slice) {
+ostream& operator<<(ostream& os, const TableSlice& slice) {
 
 	string result = "";
 

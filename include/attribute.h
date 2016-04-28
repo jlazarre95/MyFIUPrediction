@@ -5,10 +5,10 @@
 
 #define decltype1() all_values.begin() 
 
-struct attributeList;
-struct attribute;
+struct AttributeList;
+struct Attribute;
 
-enum struct attribute_type
+enum struct AttributeType
 {
 	NUMERIC,
 	STRING,
@@ -16,11 +16,11 @@ enum struct attribute_type
 	DATE
 };
 
-typedef struct attribute {
+typedef struct Attribute {
 
 public:
 	std::string name;
-	attribute_type type;
+	AttributeType type;
 	std::vector<std::string> all_values;
 	bool is_unique;
 
@@ -43,7 +43,7 @@ public:
 	auto begin() -> decltype(all_values.begin()) { return all_values.begin(); }
 	auto end()  -> decltype(all_values.end()) { return all_values.end(); }
 
-	bool operator==(const attribute &other) const 
+	bool operator==(const Attribute &other) const 
 	{
 		if (name == other.name && type == other.type)
 			return true;
@@ -51,4 +51,4 @@ public:
 			return false;
 	}
 
-} attribute;
+} Attribute;

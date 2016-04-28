@@ -19,7 +19,7 @@ ImpurityMeasure::~ImpurityMeasure()
 
 
 
-void ImpurityMeasure::setRelationHeader(relationHeader _relation_header)
+void ImpurityMeasure::setRelationHeader(RelationHeader _relation_header)
 {
 	relation_header = _relation_header;
 }

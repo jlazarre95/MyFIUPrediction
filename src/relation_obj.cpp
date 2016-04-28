@@ -2,57 +2,57 @@
 
 using namespace std;
 
-relationObj::relationObj()
+RelationObj::RelationObj()
 {
 }
 
-relationObj::~relationObj()
+RelationObj::~RelationObj()
 {
 }
 
-relationObj::relationObj(std::string _name, relationHeader _header, relationTable _table)
+RelationObj::RelationObj(std::string _name, RelationHeader _header, RelationTable _table)
 {
 	header = _header;
 	header.name = _name;
 	table = _table;
 }
 
-int relationObj::getIndexOfAttribute(string attribute_name)
+int RelationObj::getIndexOfAttribute(string attribute_name)
 {
 	return header.getIndexOfAttribute(attribute_name);
 }
 
-attributeList relationObj::getAllAttributes()
+AttributeList RelationObj::getAllAttributes()
 {
 	return header.all_attributes;
 }
 
-int relationObj::getNumOfAttributes()
+int RelationObj::getNumOfAttributes()
 {
 	return header.getNumOfColumns();
 }
 
-int relationObj::getNumOfRecords()
+int RelationObj::getNumOfRecords()
 {
 	return table.getNumOfRows();
 }
 
-void relationObj::setTable(relationTable _table)
+void RelationObj::setTable(RelationTable _table)
 {
 	table = _table;
 }
 
-relationTable relationObj::getTable()
+RelationTable RelationObj::getTable()
 {
 	return table;
 }
 
-relationTable relationObj::selectAll(int attribute_index, std::string attribute_value_name)
+RelationTable RelationObj::selectAll(int attribute_index, std::string attribute_value_name)
 {
 	return table.selectAll(attribute_index, attribute_value_name);
 }
 
-//const relationHeader& relation::getHeader()
+//const RelationHeader& relation::getHeader()
 //{
 //	return header;
 //}

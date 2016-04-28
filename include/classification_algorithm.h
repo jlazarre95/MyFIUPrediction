@@ -13,24 +13,24 @@
 		~ClassificationAlgorithm();
 		//TODO: create constructor to init relation and class label
 
-		int setRelation(relationObj _relation_obj);
+		int setRelation(RelationObj _relation_obj);
 		void setClassLabel(std::string _class_label);
-		virtual std::string predict(tableRow record) = 0;
+		virtual std::string predict(TableRow record) = 0;
 		//TODO: create function validaterelation() that checks for valid attribute names, repeated attribute names, etc.
 
 		//template <class InputIterator>
-		//virtual std::predictIgnore(tableRow record, InputIterator first, InputIterator last) = 0;
+		//virtual std::predictIgnore(TableRow record, InputIterator first, InputIterator last) = 0;
 
 
 		int class_label_index;
 	/*	int num_of_records;
 		int num_of_attributes;*/
 
-		relationObj relation_obj;
+		RelationObj relation_obj;
 
 	protected:
 		std::string class_label;
-		int validateRecord(tableRow record);
+		int validateRecord(TableRow record);
 		//std::vector<int> ignored_attribute_indexes;
 
 

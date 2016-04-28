@@ -2,24 +2,24 @@
 #include <vector>
 #include <string>
 
-struct relationTable;
+struct RelationTable;
 
-typedef struct tableSlice
+typedef struct TableSlice
 {
 
 public:
 
-	tableSlice();
+	TableSlice();
 	template <class InputIterator>
-	tableSlice(InputIterator first, InputIterator last)
+	TableSlice(InputIterator first, InputIterator last)
 	{
 		setAllValues(first, last);
 	} // use template
 
-	~tableSlice();
+	~TableSlice();
 	int size();
 	std::string operator[](int index) { return all_values[index]; }
-	friend relationTable;
+	friend RelationTable;
 
 	std::string getMajorityValue();
 	std::vector<std::string> all_values;
@@ -29,7 +29,7 @@ public:
 	auto begin() -> decltype(all_values.begin()) { return all_values.begin(); }
 	auto end() -> decltype(all_values.end()) { return all_values.end(); }
 
-	friend std::ostream& operator<<(std::ostream& os, const tableSlice& slice);
+	friend std::ostream& operator<<(std::ostream& os, const TableSlice& slice);
 
 protected:
 	template <class InputIterator>
@@ -52,5 +52,5 @@ protected:
 
 private:
 
-} tableSlice;
+} TableSlice;
 

@@ -3,21 +3,21 @@
 #include "attribute.h"
 
 
-typedef struct attributeList
+typedef struct AttributeList
 {
 public:
-	attributeList();
-	~attributeList();
+	AttributeList();
+	~AttributeList();
 	template <class InputIterator>
-	attributeList(InputIterator first, InputIterator last) { setAllAttributes(first, last); }
-	void addAttribute(attribute new_attribute);
-	attribute getAttribute(int index);
-	attribute getAttribute(std::string attribute_name);
+	AttributeList(InputIterator first, InputIterator last) { setAllAttributes(first, last); }
+	void addAttribute(Attribute new_attribute);
+	Attribute getAttribute(int index);
+	Attribute getAttribute(std::string attribute_name);
 	int getIndexOfAttribute(std::string attribute_name);
 	int getNumOfAttributes();
-	attribute operator[](int index) { return getAttribute(index); }
+	Attribute operator[](int index) { return getAttribute(index); }
 
-	std::vector<attribute> all_attributes;
+	std::vector<Attribute> all_attributes;
 
 	auto begin() -> decltype(all_attributes.begin()) { return all_attributes.begin(); }
 	auto end() -> decltype(all_attributes.end()) { return all_attributes.end(); }
@@ -27,10 +27,10 @@ public:
 	{
 		for (InputIterator all_attributes_iterator = first; all_attributes_iterator != last; all_attributes_iterator++)
 		{
-			attribute new_attribute = *all_attributes_iterator;
+			Attribute new_attribute = *all_attributes_iterator;
 			all_attributes.push_back(new_attribute);
 		}
 	}
 
 
-} attributeList;
+} AttributeList;

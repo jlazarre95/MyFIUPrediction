@@ -2,64 +2,64 @@
 
 using namespace std;
 
-struct relationTable;
+struct RelationTable;
 
-relationTable::relationTable()
+RelationTable::RelationTable()
 {
 }
 
-relationTable::~relationTable()
+RelationTable::~RelationTable()
 {
 }
 
 //template <class InputIterator>
-//relationTable::relationTable(InputIterator first, InputIterator last) // use template
+//RelationTable::RelationTable(InputIterator first, InputIterator last) // use template
 //{
 //	setAllRows(first, last);
 //}
 
-tableRow relationTable::getRow(int index)
+TableRow RelationTable::getRow(int index)
 {
 	return all_rows[index];
 }
 
-tableColumn relationTable::getColumn(int index)
+tableColumn RelationTable::getColumn(int index)
 {
 	tableColumn column;
 
-	for (tableRow row : all_rows)
+	for (TableRow row : all_rows)
 		column.push_back(row[index]);
 
 	return column;
 }
 
-void relationTable::push_back(tableRow row)
+void RelationTable::push_back(TableRow row)
 {
 	all_rows.push_back(row);
 }
 
-relationTable relationTable::selectAll(int attribute_index, std::string attribute_value_name)
+RelationTable RelationTable::selectAll(int attribute_index, std::string attribute_value_name)
 {
-	relationTable result;
-	for (tableRow record : all_rows)
+	RelationTable result;
+	for (TableRow record : all_rows)
 		if (record[attribute_index] == attribute_value_name)
 			result.push_back(record);
 
 	return result;
 }
 
-int relationTable::getNumOfRows()
+int RelationTable::getNumOfRows()
 {
 	return all_rows.size();
 }
 
 //template <class InputIterator>
-//void relationTable::setAllRows(InputIterator first, InputIterator last)
+//void RelationTable::setAllRows(InputIterator first, InputIterator last)
 //{
 //
 //	for (InputIterator table_iterator = first; table_iterator != last; table_iterator++)
 //	{
-//		tableRow new_row;
+//		TableRow new_row;
 //		decltype(*table_iterator) record = *table_iterator;
 //
 //		for (string value : record) 

@@ -83,7 +83,7 @@
 		}
 	}
 
-	std::vector<attribute> ArffParser::parseAttributeList()
+	std::vector<Attribute> ArffParser::parseAttributeList()
 	{
 		using namespace std;
 
@@ -96,7 +96,7 @@
 		const string arff_data_tag = "@DATA";
 		const string arff_comment_tag = "%";
 
-		vector<attribute> _attr_list;
+		vector<Attribute> _attr_list;
 		int attribute_count = 0;
 
 		/* Get relation header */
@@ -129,7 +129,7 @@
 				vector<string> vec_attribute = tokenizeAll(input_line_iterator, input_line, delimiters);
 				//printVec(vec_attribute);
 
-				attribute new_attribute;
+				Attribute new_attribute;
 				auto it = vec_attribute.begin();
 				new_attribute.name = *it;
 				//cout << "attribute name " << new_attribute.name << endl;
@@ -138,12 +138,12 @@
 				if (attribute_type == "NUMERIC")
 				{
 					//cout << "k\n";
-					new_attribute.type = attribute_type::NUMERIC;
+					new_attribute.type = AttributeType::NUMERIC;
 				}
 				else if (attribute_type == "STRING")
-					new_attribute.type = attribute_type::STRING;
+					new_attribute.type = AttributeType::STRING;
 				else if (attribute_type == "DATE")
-					new_attribute.type = attribute_type::DATE;
+					new_attribute.type = AttributeType::DATE;
 				else
 				{
 					//cout << "yoooo\n";
@@ -163,7 +163,7 @@
 						  }
 						attribute_type.pop_back(); // remove close paren
 
-						new_attribute.type = attribute_type::NOMINAL;
+						new_attribute.type = AttributeType::NOMINAL;
 						delimiters = { "," };
 						vector<string> all_tokens = tokenizeAll(attribute_type.begin(), attribute_type, delimiters);
 						new_attribute.setAllValues(all_tokens.begin(), all_tokens.end());

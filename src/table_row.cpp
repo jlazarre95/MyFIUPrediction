@@ -2,10 +2,10 @@
 
 using namespace std;
 
-tableRow::tableRow()
+TableRow::TableRow()
 {
 }
 
-tableRow::~tableRow()
+TableRow::~TableRow()
 {
 }

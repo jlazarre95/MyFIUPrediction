@@ -2,16 +2,16 @@
 #include "table_slice.h"
 
 
-struct relationTable;
+struct RelationTable;
 
-typedef struct tableColumn : public tableSlice
+typedef struct TableColumn : public TableSlice
 {
 
 public:
-	tableColumn();
+	TableColumn();
 	template <class InputIterator>
-	tableColumn(InputIterator first, InputIterator last) : tableSlice(first, last) {}; // use template
-	~tableColumn();
-	friend relationTable;
+	TableColumn(InputIterator first, InputIterator last) : tableSlice(first, last) {}; // use template
+	~TableColumn();
+	friend RelationTable;
 } tableColumn;
 

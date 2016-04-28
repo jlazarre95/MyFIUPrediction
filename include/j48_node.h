@@ -10,7 +10,7 @@
 typedef struct J48Node {
 
 	J48Node();
-	J48Node(int _attribute_index, attribute attr, float _impurity);
+	J48Node(int _attribute_index, Attribute attr, float _impurity);
 	~J48Node();
 
 	void setAsLeafNode(std::string _class_label_value);

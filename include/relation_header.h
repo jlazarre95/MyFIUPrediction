@@ -2,21 +2,21 @@
 #include "attribute_list.h"
 #include <vector>
 
-struct relationObj;
+struct RelationObj;
 
-typedef struct relationHeader{
+typedef struct RelationHeader{
 
 public:
-	relationHeader();
-	~relationHeader();
-	relationHeader(attributeList _all_attributes);
-	friend relationObj;
+	RelationHeader();
+	~RelationHeader();
+	RelationHeader(AttributeList _all_attributes);
+	friend RelationObj;
 
-	attributeList all_attributes;
+	AttributeList all_attributes;
 	int getIndexOfAttribute(std::string attribute_name);
 	int getNumOfColumns();
 
 private:
 	std::string name;
 
-} relationHeader;
+} RelationHeader;

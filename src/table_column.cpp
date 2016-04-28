@@ -2,11 +2,11 @@
 
 using namespace std;
 
-tableColumn::tableColumn()
+TableColumn::TableColumn()
 {
 }
 
-tableColumn::~tableColumn()
+TableColumn::~TableColumn()
 {
 }
 

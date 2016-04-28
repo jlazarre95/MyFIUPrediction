@@ -4,28 +4,28 @@
 #include "table_row.h"
 #include "table_slice.h" // necessary?
 
-struct relationObj;
+struct RelationObj;
 
 //for example... vector<vector<string>>
 
 //template <typename container< typename container <std::string>>>;
 
-typedef struct relationTable{
+typedef struct RelationTable{
 
 public:
-	relationTable();
-	~relationTable();
+	RelationTable();
+	~RelationTable();
 	template <class InputIterator>
-	relationTable(InputIterator first, InputIterator last) { setAllRows(first, last); } // use template
-	tableRow getRow(int index);
-	tableColumn getColumn(int index);
-	void push_back(tableRow row);
-	relationTable selectAll(int attribute_index, std::string attribute_value_name);
-	friend relationObj;
+	RelationTable(InputIterator first, InputIterator last) { setAllRows(first, last); } // use template
+	TableRow getRow(int index);
+	TableColumn getColumn(int index);
+	void push_back(TableRow row);
+	RelationTable selectAll(int attribute_index, std::string attribute_value_name);
+	friend RelationObj;
 	/*int getSize();
 	std::vector<std::vector<std::string>> getRecords();*/
 
-	std::vector<tableRow> all_rows;
+	std::vector<TableRow> all_rows;
 	int getNumOfRows();
 
 	auto begin() -> decltype(all_rows.begin()) { return all_rows.begin(); }
@@ -36,7 +36,7 @@ public:
 	{
 		for (InputIterator table_iterator = first; table_iterator != last; table_iterator++)
 		{
-			tableRow new_row;
+			TableRow new_row;
 			decltype(*table_iterator) record = *table_iterator;
 
 			for (std::string value : record)
@@ -50,4 +50,4 @@ public:
 	} // use template
 
 
-} relationTable;
+} RelationTable;

@@ -25,14 +25,14 @@ public:
 	int parseFile();
 
 	virtual std::string parseName() = 0;
-	virtual std::vector<attribute> parseAttributeList() = 0;
+	virtual std::vector<Attribute> parseAttributeList() = 0;
 	virtual std::vector<std::vector<std::string>> parseRecords() = 0;
 
 	std::vector<std::string> tokenizeAll(std::string::const_iterator input_line_iterator, const std::string& input_line, const std::vector<std::string>& delimiters);
 	std::string::const_iterator tokenize(std::string::const_iterator input_line_iterator, const std::string & input_line, std::string & string_token, const std::vector<std::string>& delimiters);
 
 	static bool contains(std::string s, char c);
-	relationObj getRelationObj() { return relation_obj; }
+	RelationObj getRelationObj() { return relation_obj; }
 
 	//std::string getRelationName() { return relation_name; }
 
@@ -55,7 +55,7 @@ public:
 	protected:
 		std::string data_file_directory;
 
-		relationObj relation_obj;
+		RelationObj relation_obj;
 		int ERROR_NUMBER = 0; // initialize to 0
 
 	};

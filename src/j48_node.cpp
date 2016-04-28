@@ -12,7 +12,7 @@ J48Node::~J48Node()
 		delete branch;
 }
 
-J48Node::J48Node(int _attribute_index, attribute attr, float _impurity)
+J48Node::J48Node(int _attribute_index, Attribute attr, float _impurity)
 {
 
 

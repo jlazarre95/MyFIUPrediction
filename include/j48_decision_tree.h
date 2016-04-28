@@ -14,17 +14,17 @@ TODO: deal with decision trees that don't cover all rules
 		J48DecisionTree();
 		/*J48DecisionTree(std::string _class_label);
 		J48DecisionTree(ImpurityMeasure* _impurity_measure, std::string _class_label);*/
-		J48DecisionTree(relationObj _relation_obj, std::string _class_label);
-		J48DecisionTree(relationObj _relation_obj, ImpurityMeasure * _impurity_measure, std::string _class_label);
+		J48DecisionTree(RelationObj _relation_obj, std::string _class_label);
+		J48DecisionTree(RelationObj _relation_obj, ImpurityMeasure * _impurity_measure, std::string _class_label);
 
 		~J48DecisionTree();
 
 		void setImpurityMeasure(ImpurityMeasure* _impurity_measure);
 		void buildDecisionTree();
-		virtual std::string predict(tableRow record);
+		virtual std::string predict(TableRow record);
 
 		template <class InputIterator>
-		std::string predictIgnore(tableRow record, InputIterator first, InputIterator last)
+		std::string predictIgnore(TableRow record, InputIterator first, InputIterator last)
 		{
 			std::vector<int> ignored_attribute_indexes;
 
@@ -57,10 +57,10 @@ TODO: deal with decision trees that don't cover all rules
 		std::string default_class_label_value;
 		bool is_tree_built;
 
-		void recBuildSubtrees(J48Node* node, relationTable table);
-		/* virtual? */ std::string recPredict(tableRow record, J48Node* curr_node);
+		void recBuildSubtrees(J48Node* node, RelationTable table);
+		/* virtual? */ std::string recPredict(TableRow record, J48Node* curr_node);
 
-		//static void operatorHelper(relationObj& _rel_obj, J48Node* node, int num_of_spaces);
+		//static void operatorHelper(RelationObj& _rel_obj, J48Node* node, int num_of_spaces);
 
 		std::string class_label;
 

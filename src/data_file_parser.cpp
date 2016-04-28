@@ -16,7 +16,7 @@
 	int DataFileParser::parseFile()
 	{
 		string relation_name;
-		vector<attribute> attr_list;
+		vector<Attribute> attr_list;
 		vector<vector<string>> records;
 
 
@@ -25,10 +25,10 @@
 		attr_list = parseAttributeList();
 		records = parseRecords();
 
-		relationHeader header = relationHeader(attributeList(attr_list.begin(), attr_list.end()));
-		relationTable table = relationTable(records.begin(), records.end());
+		RelationHeader header = RelationHeader(AttributeList(attr_list.begin(), attr_list.end()));
+		RelationTable table = RelationTable(records.begin(), records.end());
 
-		relation_obj = relationObj(relation_name, header, table);
+		relation_obj = RelationObj(relation_name, header, table);
 
 		return 0;
 	}

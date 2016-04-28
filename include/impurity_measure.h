@@ -8,11 +8,11 @@ public:
 
 	ImpurityMeasure();
 	~ImpurityMeasure();
-	ImpurityMeasure(relationHeader _relation_header) { setRelationHeader(_relation_header); }
-	virtual float calculate_impurity(int attribute_index, relationTable table) = 0; // calculate for any attribute, most likely will be for class_label
-	virtual int findBestInitalSplit(int class_label_index, relationTable table, float* attribute_impurity = NULL) = 0;
-	virtual int findBestSplitOnBranch(int class_label_index, int attribute_index_of_value, relationTable table, float* attribute_impurity = NULL) = 0;
-	void setRelationHeader(relationHeader _relation_header);
+	ImpurityMeasure(RelationHeader _relation_header) { setRelationHeader(_relation_header); }
+	virtual float calculate_impurity(int attribute_index, RelationTable table) = 0; // calculate for any attribute, most likely will be for class_label
+	virtual int findBestInitalSplit(int class_label_index, RelationTable table, float* attribute_impurity = NULL) = 0;
+	virtual int findBestSplitOnBranch(int class_label_index, int attribute_index_of_value, RelationTable table, float* attribute_impurity = NULL) = 0;
+	void setRelationHeader(RelationHeader _relation_header);
 	bool isIgnoredAttribute(int attribute_index);
 
 	template <class InputIterator> 
@@ -27,9 +27,9 @@ public:
 	//float getClassLabelImpurity();
 
 protected:
-	//virtual float calculateAttributeValueImpurity(std::string branch_name, relationTable table) = 0; 
+	//virtual float calculateAttributeValueImpurity(std::string branch_name, RelationTable table) = 0; 
 	std::vector<int> ignored_attribute_indexes;
-	relationHeader relation_header; //only need to know header. supply table to each method as argument
+	RelationHeader relation_header; //only need to know header. supply table to each method as argument
 
 
 

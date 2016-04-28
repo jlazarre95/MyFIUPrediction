@@ -2,27 +2,27 @@
 
 using namespace std;
 
-struct relationHeader;
+struct RelationHeader;
 
-relationHeader::relationHeader()
+RelationHeader::RelationHeader()
 {
 }
 
-relationHeader::~relationHeader()
+RelationHeader::~RelationHeader()
 {
 }
 
-relationHeader::relationHeader(attributeList _all_attributes)
+RelationHeader::RelationHeader(AttributeList _all_attributes)
 {
 	all_attributes = _all_attributes;
 }
 
-int relationHeader::getIndexOfAttribute(string attribute_name)
+int RelationHeader::getIndexOfAttribute(string attribute_name)
 {
 	return all_attributes.getIndexOfAttribute(attribute_name);
 }
 
-int relationHeader::getNumOfColumns()
+int RelationHeader::getNumOfColumns()
 {
 	return all_attributes.getNumOfAttributes();
 }
