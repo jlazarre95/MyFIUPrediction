@@ -34,10 +34,11 @@ TODO: deal with decision trees that don't cover all rules
 				int ignored_attribute_index = relation_obj.getIndexOfAttribute(ignored_attribute_name);
 				ignored_attribute_indexes.push_back(ignored_attribute_index);
 			}
-
+			
 			impurity_measure->setIgnoredAttributes(ignored_attribute_indexes.begin(), ignored_attribute_indexes.end());
 
-			buildDecisionTree();
+			if(is_tree_built == false)
+				buildDecisionTree();
 
 			std::string predicted_class_label = recPredict(record, root);
 
@@ -53,9 +54,12 @@ TODO: deal with decision trees that don't cover all rules
 		j48_node* root;
 		//int fanout;
 		ImpurityMeasure* impurity_measure;
+		std::string default_class_label_value;
+		bool is_tree_built;
+
 		void recBuildSubtrees(j48_node* node, relationTable table);
 		/* virtual? */ std::string recPredict(tableRow record, j48_node* curr_node);
-		std::string default_class_label_value;
+
 		//static void operatorHelper(relationObj& _rel_obj, j48_node* node, int num_of_spaces);
 
 		std::string class_label;

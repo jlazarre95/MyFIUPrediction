@@ -6,7 +6,7 @@
 %	(c) Date Created: Unknown
 %	(d) Date Accessed: Uknown
 % 
-% REMOVE REDUNDANCIES!
+% REMOVE REDUNDANCIES?
 @RELATION Student Transcript
 
 @ATTRIBUTE transcript_id NUMERIC

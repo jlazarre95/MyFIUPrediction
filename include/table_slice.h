@@ -29,6 +29,8 @@ public:
 	auto begin() -> decltype(all_values.begin()) { return all_values.begin(); }
 	auto end() -> decltype(all_values.end()) { return all_values.end(); }
 
+	friend std::ostream& operator<<(std::ostream& os, const tableSlice& slice);
+
 protected:
 	template <class InputIterator>
 	void setAllValues(InputIterator first, InputIterator last)

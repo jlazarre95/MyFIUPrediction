@@ -8,6 +8,8 @@ using namespace std;
 J48DecisionTree::J48DecisionTree()
 {
 	impurity_measure = new Entropy(); // default impurity_measure to Entropy object
+	is_tree_built = false;
+
 	// relation_obj not initialized
 	// class_label not initialized
 
@@ -33,6 +35,7 @@ J48DecisionTree::J48DecisionTree(relationObj _relation_obj, std::string _class_l
 	setRelation(_relation_obj);
 	impurity_measure = new Entropy(); // default impurity_measure to Entropy object
 	setClassLabel(_class_label);
+	is_tree_built = false;
 }
 
 J48DecisionTree::J48DecisionTree(relationObj _relation_obj, ImpurityMeasure * _impurity_measure, std::string _class_label)
@@ -40,6 +43,7 @@ J48DecisionTree::J48DecisionTree(relationObj _relation_obj, ImpurityMeasure * _i
 	setRelation(_relation_obj);
 	impurity_measure = _impurity_measure; // TODO: check if class of ImpurityMeasure object is concrete
 	setClassLabel(_class_label);
+	is_tree_built = false;
 }
 
 
@@ -140,12 +144,16 @@ void J48DecisionTree::buildDecisionTree()
 	//cout << "Entropy of Best Attribute Split (" << relation_obj.getAttributeName(best_initial_attribute_index) << "): " << root->impurity << endl;
 
 	recBuildSubtrees(root, relation_obj.getTable());
+	is_tree_built = true;
+
+	return;
 
 }
 
 string J48DecisionTree::predict(tableRow record)
 {
-  //buildDecisionTree();
+	if(is_tree_built == false)
+		buildDecisionTree();
 
 	string predicted_class_label = recPredict(record, root);
 	return predicted_class_label;

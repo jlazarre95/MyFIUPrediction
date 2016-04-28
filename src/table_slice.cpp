@@ -1,5 +1,6 @@
 #include "../include/table_slice.h"
 #include <stdexcept>
+#include <iostream>
 
 using namespace std;
 
@@ -111,3 +112,18 @@ bool tableSlice::hasDistinctValues()
 	return has_distinct_values = true;
 }
 
+
+ostream& operator<<(ostream& os, const tableSlice& slice) {
+
+	string result = "";
+
+	for (string value : slice.all_values)
+		result += (value + " ");
+
+	result.pop_back(); // remove last space
+
+	cout << result;
+
+	return os;
+
+}
