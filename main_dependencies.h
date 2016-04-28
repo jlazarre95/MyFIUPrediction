@@ -16,7 +16,7 @@
 #include "include/entropy.h"
 #include "include/impurity_measure.h"
 #include "include/j48_decision_tree.h"
-#include "include/classification_algorithm.h"
+#include "include/classifier.h"
 #include "include/arff_parser.h"
 #include "include/data_file_parser.h"
 #include "include/relation_obj.h"

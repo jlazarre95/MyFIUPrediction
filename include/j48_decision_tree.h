@@ -1,14 +1,14 @@
 #pragma once
-#include "classification_algorithm.h"
+#include <iostream>
+#include "classifier.h"
 #include "impurity_measure.h"
 #include "j48_node.h"
-#include <iostream>
 
 /*
 TODO: deal with decision trees that don't cover all rules
 */
 
-	class J48DecisionTree : public ClassificationAlgorithm
+	class J48DecisionTree : public Classifier
 	{
 	public:
 		J48DecisionTree();
