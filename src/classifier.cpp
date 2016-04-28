@@ -25,7 +25,7 @@ int Classifier::validateRecord(TableRow record) // private
 	if (record.size() != required_num_of_attributes)
 		return RECORD_SIZE_ERROR;
 
-	for (unsigned int i = 0; i < required_num_of_attributes; i++)
+	for (int i = 0; i < required_num_of_attributes; i++)
 
 		if (relation_obj[i].type == AttributeType::NUMERIC)
 		{

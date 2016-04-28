@@ -2,29 +2,29 @@
 #include "../include/arff_parser.h"
 #include <algorithm> 
 
-	using namespace std;
+using namespace std;
 
-	ArffParser::ArffParser()
-	{
-	}
+ArffParser::ArffParser()
+{
+}
 
 
-	ArffParser::~ArffParser()
-	{
+ArffParser::~ArffParser()
+{
 		closeFile();
 	}
 
 
-	static void printVec(std::vector<std::string> string_vector)
-	{
-		int i = 0;
+static void printVec(std::vector<std::string> string_vector)
+{
+	int i = 0;
 
-		for (std::string str : string_vector)
-			std::cout << "[" << str << "] ";
-		std::cout << std::endl;
-		return;
+	for (std::string str : string_vector)
+		std::cout << "[" << str << "] ";
+	std::cout << std::endl;
+	return;
 
-	}
+}
 
 	int ArffParser::openFile(string _arff_file_directory)
 	{
@@ -81,6 +81,8 @@
 				return ""; // error, throw exception
 
 		}
+
+		return ""; // error, throw exception
 	}
 
 	std::vector<Attribute> ArffParser::parseAttributeList()
