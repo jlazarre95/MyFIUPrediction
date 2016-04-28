@@ -18,6 +18,19 @@ void Classifier::setClassLabel(std::string _class_label)
 	class_label_index = relation_obj.getIndexOfAttribute(class_label);
 }
 
+TableColumn Classifier::predictAll(RelationTable table)
+{
+	TableColumn all_predicted_values;
+
+	for (TableRow record : table)
+	{
+		string predicted_value = predict(record);
+		all_predicted_values.push_back(predicted_value);
+	}
+
+	return all_predicted_values;
+}
+
 int Classifier::validateRecord(TableRow record) // private
 {
 	int required_num_of_attributes = relation_obj.getNumOfAttributes();
@@ -70,7 +83,7 @@ int Classifier::setRelation(RelationObj _relation_obj)
 	{
 		if (attr.type != AttributeType::NOMINAL)
 		{
-			tableColumn col = _relation_obj_table.getColumn(i);
+			TableColumn col = _relation_obj_table.getColumn(i);
 
 			if (col.hasDistinctValues() == true)
 				attr.setUniqueness(true);

@@ -23,9 +23,9 @@ TableRow RelationTable::getRow(int index)
 	return all_rows[index];
 }
 
-tableColumn RelationTable::getColumn(int index)
+TableColumn RelationTable::getColumn(int index)
 {
-	tableColumn column;
+	TableColumn column;
 
 	for (TableRow row : all_rows)
 		column.push_back(row[index]);

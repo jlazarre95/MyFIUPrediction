@@ -15,7 +15,7 @@ TODO: deal with decision trees that don't cover all rules
 		/*J48DecisionTree(std::string _class_label);
 		J48DecisionTree(ImpurityMeasure* _impurity_measure, std::string _class_label);*/
 		J48DecisionTree(RelationObj _relation_obj, std::string _class_label);
-		J48DecisionTree(RelationObj _relation_obj, ImpurityMeasure * _impurity_measure, std::string _class_label);
+		J48DecisionTree(RelationObj _relation_obj, ImpurityMeasure* _impurity_measure, std::string _class_label);
 		~J48DecisionTree();
 
 		void setImpurityMeasure(ImpurityMeasure* _impurity_measure);
@@ -42,6 +42,20 @@ TODO: deal with decision trees that don't cover all rules
 			std::string predicted_class_label = recPredict(record, root);
 
 			return predicted_class_label;
+		}
+
+		template <class InputIterator>
+		TableColumn predictAllIgnore(RelationTable table, InputIterator first, InputIterator last)
+		{
+			TableColumn all_predicted_values;
+
+			for (TableRow record : table)
+			{
+				string predicted_value = predictIgnore(record, first, last);
+				all_predicted_values.push_back(predicted_value);
+			}
+
+			return all_predicted_values;
 		}
 
 		void setDefaultClassLabel(std::string _default_class_label_value) { default_class_label_value = _default_class_label_value; }

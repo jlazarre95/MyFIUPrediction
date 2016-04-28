@@ -107,7 +107,7 @@ void J48DecisionTree::recBuildSubtrees(J48Node* node, RelationTable table)
 			/* If there are no more attributes that can be used to split... */
 			if (best_attribute_index < 0)
 			{
-				tableColumn col = selected_rows.getColumn(class_label_index);
+				TableColumn col = selected_rows.getColumn(class_label_index);
 				string majority_attribute_value = col.getMajorityValue();
 				J48Node* leaf_node = new J48Node();
 				leaf_node->setAsLeafNode(majority_attribute_value);

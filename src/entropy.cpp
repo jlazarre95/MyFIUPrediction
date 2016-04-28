@@ -26,7 +26,7 @@ float Entropy::calculateEntropy(int attribute_index, RelationTable table)
 	if (selected_attribute.getNumOfValues() <= 0) // no values
 		return FLT_MAX;
 
-	tableColumn selected_column = table.getColumn(attribute_index);
+	TableColumn selected_column = table.getColumn(attribute_index);
 
 	for (string attribute_value : selected_attribute) // only works for nominal values?
 	{

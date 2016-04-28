@@ -5,6 +5,12 @@
 #define RECORD_SIZE_ERROR -1;
 #define  ATTRIBUTE_TYPE_MISMATCH_ERROR -2;
 
+/*
+TO DO:
+-work on validation of records
+
+*/
+
 	class Classifier
 	{
 	public:
@@ -21,6 +27,16 @@
 		int setRelation(RelationObj _relation_obj);
 		void setClassLabel(std::string _class_label);
 		virtual std::string predict(TableRow record) = 0;
+		virtual TableColumn predictAll(RelationTable table); // override this if the algorithm in classifier.cpp is inefficient
+
+		/* If your algorithm does not allow for the ignorance of certain attributes such as Decision Tree, do not override */
+		template <class InputIterator>
+		TableColumn predictAllIgnore(RelationTable table, InputIterator first, InputIterator last)
+		{
+			TableColumn all_predicted_values = predictAll(table);
+			return all_predicted_values;
+		}
+			
 		//TODO: create function validaterelation() that checks for valid attribute names, repeated attribute names, etc.
 
 		//template <class InputIterator>

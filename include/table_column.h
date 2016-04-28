@@ -15,5 +15,5 @@ public:
 	TableColumn(InputIterator first, InputIterator last) : tableSlice(first, last) {}; // use template
 	~TableColumn();
 
-} tableColumn;
+} TableColumn;
 
