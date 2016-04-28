@@ -51,17 +51,21 @@ int main(int argc, char* argv[])
 	string class_label = CLASS_LBL;
 	vector<string> ignored_attributes = IGNORED_ATTRS;
 
+	/* Parse file and get relationObj */
 	cout << "Initializing parser object...\n";
 	DataFileParser* parser = new ArffParser();
 	cout << "Opening file...\n";
 	parser->openFile("dat/student_transcript.arff");
+	
 	cout << "Parsing file...\n";
 	parser->parseFile();
 	cout << "Done parsing file...\n";
+	
 	relationObj relation_obj = parser->getRelationObj();
 	parser->closeFile();
 	cout << "File successfully closed...\n";
 
+	/* Initialize classifier */
 	cout << "Initializing Decision Tree...\n";
 	J48DecisionTree* classifier = new J48DecisionTree(relation_obj, class_label); 
 
@@ -89,8 +93,9 @@ int main(int argc, char* argv[])
 	cout << "Printing records and their predicted class labels...\n";
 	cout << "(" << record << ") : " << predicted_class_label << endl;
 
-	/* Deallocate memory for dynamic objects, arrays, etc. */
 	cout << endl;
+
+	/* Deallocate memory for dynamic objects, arrays, etc. */
 	cout << "Finished classification procedure...\n";
 	cout << "Exiting...\n";
 	cout << "Removing decision tree from heap...\n";
