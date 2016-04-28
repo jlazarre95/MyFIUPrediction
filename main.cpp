@@ -71,7 +71,12 @@ int main(int argc, char* argv[])
 
 	/* Set up default value based on class label (picks majority value from class label column) */
 	cout << "Setting default value...\n";
-	string default_class_label = classifier->relation_obj.getTable().getColumn(relation_obj.getIndexOfAttribute(class_label)).getMajorityValue();
+	int class_label_index = relation_obj.getIndexOfAttribute(class_label); // get index of class label
+	RelationTable table = classifier->relation_obj.getTable(); // retrieve table
+
+	TableColumn class_label_column = table.getColumn(class_label_index); // get column of class label
+	string default_class_label = class_label_column.getMajorityValue(); // get majority value of class label (e.g. "C+")
+
 	classifier->setDefaultClassLabel(default_class_label);
 	cout << "Default value set to " << default_class_label << "...\n";
 
