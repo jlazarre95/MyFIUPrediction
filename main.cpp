@@ -1,7 +1,7 @@
 /*
  
- THINGS TO DO:
-	-Use namespaces!
+THINGS TO DO:
+-Use namespaces!
  
  */
 
@@ -11,7 +11,7 @@ Schema for student transcript
 @ATTRIBUTE transcript_id NUMERIC
 @ATTRIBUTE course_num STRING
 @ATTRIBUTE semester_taken STRING
-@ATTRIBUTE grade_received{ A,A - ,B + ,B,B - ,C + ,C,C - ,D + ,D,D - ,F,P,INC,I }
+@ATTRIBUTE grade_received{ A,A-,B+,B,B-,C+,C,C-,D+,D,D-,F,P,INC,I }
 @ATTRIBUTE passed{ t,f }
 @ATTRIBUTE course_name STRING
 @ATTRIBUTE category STRING
@@ -71,9 +71,9 @@ int main(int argc, char* argv[])
 
 	/* Set up default value based on class label (picks majority value from class label column) */
 	cout << "Setting default value...\n";
-	string def = classifier->relation_obj.getTable().getColumn(relation_obj.getIndexOfAttribute(class_label)).getMajorityValue();
-	classifier->setDefaultClassLabel(def);
-	cout << "Default value set to " << def << "...\n";
+	string default_class_label = classifier->relation_obj.getTable().getColumn(relation_obj.getIndexOfAttribute(class_label)).getMajorityValue();
+	classifier->setDefaultClassLabel(default_class_label);
+	cout << "Default value set to " << default_class_label << "...\n";
 
 	 /* Predict class label for each record */
 	tableRow record = createRecord(vector<string>({ "8", "COP 5725", "Fall 2016", "?" , "?" , "DBMS", "Computer Programming" }));

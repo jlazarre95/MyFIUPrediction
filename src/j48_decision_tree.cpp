@@ -59,14 +59,14 @@ void J48DecisionTree::setImpurityMeasure(ImpurityMeasure* _impurity_measure)
 	impurity_measure = _impurity_measure;
 }
 
-void J48DecisionTree::recBuildSubtrees(j48_node* node, relationTable table)
+void J48DecisionTree::recBuildSubtrees(J48Node* node, relationTable table)
 {
 	//cout << *this << endl << endl;
 	/* Build Rest of tree RECURSIVELY */
 
 	int attribute_index = node->attribute_index;
 
-	for (j48_node_branch* branch : *node)
+	for (J48Branch* branch : *node)
 	{
 		string branch_name = branch->attribute_value_name; // name of attribute value
 		relationTable selected_rows = table.selectAll(attribute_index, branch_name); // update table, pass table to recursive call?
@@ -74,7 +74,7 @@ void J48DecisionTree::recBuildSubtrees(j48_node* node, relationTable table)
 		//if no selected rows, use default value and continue
 		if (selected_rows.getNumOfRows() == 0)
 		{
-			j48_node* leaf_node = new j48_node();
+			J48Node* leaf_node = new J48Node();
 			leaf_node->setAsLeafNode(default_class_label_value);
 			branch->next = leaf_node;
 			continue;
@@ -94,7 +94,7 @@ void J48DecisionTree::recBuildSubtrees(j48_node* node, relationTable table)
 
 		if (is_class_label_shared == true)
 		{/*build leaf node based on majority class... move onto next branch*/
-			j48_node* leaf_node = new j48_node();
+			J48Node* leaf_node = new J48Node();
 			leaf_node->setAsLeafNode(shared_class_label_value);
 			branch->next = leaf_node;
 			continue;
@@ -109,14 +109,14 @@ void J48DecisionTree::recBuildSubtrees(j48_node* node, relationTable table)
 			{
 				tableColumn col = selected_rows.getColumn(class_label_index);
 				string majority_attribute_value = col.getMajorityValue();
-				j48_node* leaf_node = new j48_node();
+				J48Node* leaf_node = new J48Node();
 				leaf_node->setAsLeafNode(majority_attribute_value);
 				branch->next = leaf_node;
 				continue;
 			}
 			
 			attribute best_attribute = relation_obj[best_attribute_index];
-			j48_node* intermediate_node = new j48_node(best_attribute_index, best_attribute, best_attribute_impurity);
+			J48Node* intermediate_node = new J48Node(best_attribute_index, best_attribute, best_attribute_impurity);
 			branch->next = intermediate_node;
 			recBuildSubtrees(intermediate_node, selected_rows);
 		}
@@ -139,7 +139,7 @@ void J48DecisionTree::buildDecisionTree()
 	int best_initial_attribute_index = impurity_measure->findBestInitalSplit(class_label_index, relation_obj.getTable(), &attribute_impurity);
 	attribute best_initial_attribute = relation_obj[best_initial_attribute_index];
 
-	root = new j48_node(best_initial_attribute_index, best_initial_attribute, attribute_impurity);
+	root = new J48Node(best_initial_attribute_index, best_initial_attribute, attribute_impurity);
 
 	//cout << "Entropy of Best Attribute Split (" << relation_obj.getAttributeName(best_initial_attribute_index) << "): " << root->impurity << endl;
 
@@ -166,13 +166,13 @@ string J48DecisionTree::predict(tableRow record)
 //
 //	buildDecisionTree();
 //
-//	j48_node* curr_node = root;
+//	J48Node* curr_node = root;
 //	string predicted_class_label = recPredict(record, root);
 //
 //	return predicted_class_label;
 //}
 
-std::string J48DecisionTree::recPredict(tableRow record, j48_node* curr_node)
+std::string J48DecisionTree::recPredict(tableRow record, J48Node* curr_node)
 {
 
 	if (curr_node->is_leaf == true)
@@ -182,9 +182,9 @@ std::string J48DecisionTree::recPredict(tableRow record, j48_node* curr_node)
 
 	string record_attribute_value = record[curr_node_attribute_index];
 
-	j48_node_branch* next_branch = NULL;
+	J48Branch* next_branch = NULL;
 
-	for (j48_node_branch* branch : *curr_node)
+	for (J48Branch* branch : *curr_node)
 	{
 		if (branch->attribute_value_name == record_attribute_value)
 		{
@@ -198,7 +198,7 @@ std::string J48DecisionTree::recPredict(tableRow record, j48_node* curr_node)
 		next_branch = curr_node->branches[(curr_node->branches.size())/2]; // return default value, or pick middle branch?
 	}
 
-	j48_node* next_node = next_branch->next;
+	J48Node* next_node = next_branch->next;
 
 	string predicted_class_label = recPredict(record, next_node);
 
@@ -208,7 +208,7 @@ std::string J48DecisionTree::recPredict(tableRow record, j48_node* curr_node)
 
 
 
-static void operatorHelper(relationObj & _rel_obj, j48_node * node, int num_of_spaces)
+static void operatorHelper(relationObj & _rel_obj, J48Node * node, int num_of_spaces)
 {
 
 	if (node == NULL)
@@ -233,7 +233,7 @@ static void operatorHelper(relationObj & _rel_obj, j48_node * node, int num_of_s
 
 	int branch_count = 0;
 
-	for (j48_node_branch* branch : *node)
+	for (J48Branch* branch : *node)
 	{
 		for (int i = 0; i < num_of_spaces; i++)
 			cout << " ";
@@ -245,7 +245,7 @@ static void operatorHelper(relationObj & _rel_obj, j48_node * node, int num_of_s
 			cout << endl;
 			return;
 		}
-		j48_node* next_node = branch->next;
+		J48Node* next_node = branch->next;
 		branch_count++;
 
 		operatorHelper(_rel_obj, next_node, num_of_spaces + 5); // indentation space after each attribute name
@@ -259,7 +259,7 @@ static void operatorHelper(relationObj & _rel_obj, j48_node * node, int num_of_s
 ostream& operator<<(ostream& os, const J48DecisionTree& jdt) {
 
 	relationObj rel_obj = jdt.relation_obj;
-	j48_node* root = jdt.root;
+	J48Node* root = jdt.root;
 
 	if (root == NULL)
 		std::cout << "NULL\n";

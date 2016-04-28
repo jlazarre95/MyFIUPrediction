@@ -51,16 +51,16 @@ TODO: deal with decision trees that don't cover all rules
 		friend std::ostream& operator<<(std::ostream& os, const J48DecisionTree& jdt);
 
 	protected:
-		j48_node* root;
+		J48Node* root;
 		//int fanout;
 		ImpurityMeasure* impurity_measure;
 		std::string default_class_label_value;
 		bool is_tree_built;
 
-		void recBuildSubtrees(j48_node* node, relationTable table);
-		/* virtual? */ std::string recPredict(tableRow record, j48_node* curr_node);
+		void recBuildSubtrees(J48Node* node, relationTable table);
+		/* virtual? */ std::string recPredict(tableRow record, J48Node* curr_node);
 
-		//static void operatorHelper(relationObj& _rel_obj, j48_node* node, int num_of_spaces);
+		//static void operatorHelper(relationObj& _rel_obj, J48Node* node, int num_of_spaces);
 
 		std::string class_label;
 

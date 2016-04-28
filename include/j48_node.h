@@ -3,15 +3,15 @@
 #include <string>
 #include <vector>
 #include "attribute.h"
-#include "j48_node_branch.h"
+#include "j48_branch.h"
 
 //struct or class? struct: members public by default, class: members private by default
 
-typedef struct j48_node {
+typedef struct J48Node {
 
-	j48_node();
-	j48_node(int _attribute_index, attribute attr, float _impurity);
-	~j48_node();
+	J48Node();
+	J48Node(int _attribute_index, attribute attr, float _impurity);
+	~J48Node();
 
 	void setAsLeafNode(std::string _class_label_value);
 
@@ -19,12 +19,12 @@ typedef struct j48_node {
 	float impurity; //necessary?
 	bool is_leaf;
 	std::string class_label_value;
-	std::vector<struct j48_node_branch*> branches;
+	std::vector<struct J48Branch*> branches;
 
 	auto begin() -> decltype (branches.begin()) { return branches.begin(); }
 	auto end() -> decltype (branches.end()) { return branches.end(); }
 
 
-} j48_node;
+} J48Node;
 
 
