@@ -15,5 +15,7 @@ public:
 	TableColumn(InputIterator first, InputIterator last) : tableSlice(first, last) {}; // use template
 	~TableColumn();
 
+	std::vector<int> compareValues(TableColumn other); // abstract to use with TableSlice?
+
 } TableColumn;
 

@@ -6,6 +6,15 @@ ClassifierStack::ClassifierStack()
 {
 }
 
+ClassifierStack::~ClassifierStack()
+{
+	for (Classifier* classifier : all_classifiers)
+	{
+		delete classifier;
+	}
+}
+
+
 void ClassifierStack::push_back(Classifier* new_classifier)
 {
 	all_classifiers.push_back(new_classifier);
@@ -54,10 +63,3 @@ TableColumn ClassifierStack::predictAll(RelationTable table)
 	
 }
 
-ClassifierStack::~ClassifierStack()
-{
-	for (Classifier* classifier : all_classifiers)
-	{
-		delete classifier;
-	}
-}

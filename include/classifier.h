@@ -24,7 +24,7 @@ TO DO:
 		~Classifier();
 		//TODO: create constructor to init relation and class label
 
-		int setRelation(RelationObj _relation_obj);
+		virtual int setRelation(RelationObj _relation_obj);
 		void setClassLabel(std::string _class_label);
 		virtual std::string predict(TableRow record) = 0;
 		virtual TableColumn predictAll(RelationTable table); // override this if the algorithm in classifier.cpp is inefficient

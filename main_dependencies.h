@@ -21,6 +21,7 @@
 #include "include/data_file_parser.h"
 #include "include/relation_obj.h"
 #include "include/table_row.h"
+#include "include/classifier_stack.h"
 //#include "include/json_parser.h"
 
 
